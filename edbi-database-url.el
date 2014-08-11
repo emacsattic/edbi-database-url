@@ -5,6 +5,7 @@
 ;; Author: Malyshev Artem <proofit404@gmail.com>
 ;; URL: https://github.com/proofit404/edbi-database-url
 ;; Version: 1.0.0
+;; Package-Requires: ((emacs "24") (edbi "0.1.3"))
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -22,6 +23,18 @@
 ;;; Commentary:
 
 ;;; Code:
+
+(require 'json)
+(require 'edbi)
+
+(defvar edbi-database-url-env "DATABASE_URL"
+  "Environment variable used as database url.")
+
+(defun edbi-database-url-read-url ()
+  "Read database url from environment variable."
+  (or (getenv edbi-database-url-env)
+      (error "Unspecified %s environment variable"
+             edbi-database-url-env)))
 
 (provide 'edbi-database-url)
 
