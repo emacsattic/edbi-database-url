@@ -74,6 +74,16 @@
    (url-user urlobj)
    (url-password urlobj)))
 
+;;;###autoload
+(defun edbi-database-url (url)
+  "Open database url URL with `edbi'."
+  (interactive (list (edbi-database-url-read-url)))
+  (let* ((urlobj (edbi-database-url-parse-url url))
+         (source (edbi-database-url-data-source urlobj))
+         (conn (edbi:start)))
+    (edbi:connect conn source)
+    (edbi:dbview-open conn)))
+
 (provide 'edbi-database-url)
 
 ;;; edbi-database-url.el ends here
