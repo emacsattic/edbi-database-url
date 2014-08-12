@@ -24,12 +24,20 @@
 
 ;;; Code:
 
-(require 'json)
 (require 'edbi)
 (require 'url-parse)
 
 (defvar edbi-database-url-env "DATABASE_URL"
   "Environment variable used as database url.")
+
+(defvar edbi-database-url-engines
+  '(("postgres" . "Pg")
+    ("postgresql" . "Pg")
+    ("pgsql" . "Pg")
+    ("sqlite" . "SQLite")
+    ("mysql" . "mysql")
+    ("mysql2" . "mysql"))
+  "Database URL to DBI engines mapping.")
 
 (defun edbi-database-url-read-url ()
   "Read database url from environment variable."
@@ -46,6 +54,18 @@
 (defun edbi-database-url-parse-url (url)
   "Parse database URL."
   (url-generic-parse-url url))
+
+(defun edbi-database-url-generate-uri (urlobj)
+  "Generate DBI uri from URLOBJ struct."
+  (format "dbi:%s:%s"
+          ;; Engine.
+          (cdr (assoc-string
+                (url-type urlobj) edbi-database-url-engines))
+          ;; Params.
+          (concat
+           (format "dbname=%s" (substring (url-filename urlobj) 1))
+           (and (url-host urlobj) (format ";host=%s" (url-host urlobj)))
+           (and (url-port urlobj) (format ";port=%s" (url-port urlobj))))))
 
 (provide 'edbi-database-url)
 

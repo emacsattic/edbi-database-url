@@ -52,6 +52,14 @@
                   (edbi-database-url-parse-url
                    "sqlite://user:password@localhost:5678/name")))))
 
+;;; Generate uri.
+
+(ert-deftest test-edbi-database-url-generate-uri ()
+  (should (equal "dbi:Pg:dbname=test;host=localhost;port=5678"
+                 (edbi-database-url-generate-uri
+                  (edbi-database-url-parse-url
+                   "postgres://user:password@localhost:5678/test")))))
+
 (provide 'edbi-django-test)
 
 ;;; edbi-database-url-test.el ends here
