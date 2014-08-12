@@ -35,6 +35,15 @@
                  (let ((current-prefix-arg '(4)))
                    (edbi-database-url-read-url)))))
 
+(ert-deftest test-edbi-database-url-read-url-region-active ()
+  (with-temp-buffer
+    (insert "sqlite://user:password@host:port/name")
+    (transient-mark-mode 1)
+    (mark-whole-buffer)
+    (should (equal "sqlite://user:password@host:port/name"
+                   (let ((current-prefix-arg '(4)))
+                     (edbi-database-url-read-url))))))
+
 (provide 'edbi-django-test)
 
 ;;; edbi-database-url-test.el ends here
