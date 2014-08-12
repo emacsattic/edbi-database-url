@@ -26,6 +26,7 @@
 
 (require 'json)
 (require 'edbi)
+(require 'url-parse)
 
 (defvar edbi-database-url-env "DATABASE_URL"
   "Environment variable used as database url.")
@@ -41,6 +42,10 @@
     (or (getenv edbi-database-url-env)
         (error "Unspecified %s environment variable"
                edbi-database-url-env))))
+
+(defun edbi-database-url-parse-url (url)
+  "Parse database URL."
+  (url-generic-parse-url url))
 
 (provide 'edbi-database-url)
 
