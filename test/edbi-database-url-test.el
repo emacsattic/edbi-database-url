@@ -7,6 +7,12 @@
 (require 'ert)
 (require 'edbi-database-url)
 
+(defun mock-read-string (&rest ignored)
+  "Mock `read-string' variant IGNORED any args."
+  "postgres://user:password@host:port/name")
+
+(defalias 'read-string 'mock-read-string)
+
 ;;; Read settings.
 
 (ert-deftest test-edbi-database-url-read-url ()
@@ -23,6 +29,11 @@
                  (condition-case err
                      (edbi-database-url-read-url)
                    (error (error-message-string err))))))
+
+(ert-deftest test-edbi-database-url-read-url-C-u ()
+  (should (equal "postgres://user:password@host:port/name"
+                 (let ((current-prefix-arg '(4)))
+                   (edbi-database-url-read-url)))))
 
 (provide 'edbi-django-test)
 
