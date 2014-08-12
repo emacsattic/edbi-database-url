@@ -60,6 +60,15 @@
                   (edbi-database-url-parse-url
                    "postgres://user:password@localhost:5678/test")))))
 
+;;; Data source.
+
+(ert-deftest test-edbi-database-url-data-source ()
+  (should (equal "password"
+                 (caddr
+                  (edbi-database-url-data-source
+                   (edbi-database-url-parse-url
+                    "postgres://user:password@localhost:5678/test"))))))
+
 (provide 'edbi-django-test)
 
 ;;; edbi-database-url-test.el ends here

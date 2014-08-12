@@ -67,6 +67,13 @@
            (and (url-host urlobj) (format ";host=%s" (url-host urlobj)))
            (and (url-port urlobj) (format ";port=%s" (url-port urlobj))))))
 
+(defun edbi-database-url-data-source (urlobj)
+  "Create `edbi-data-source' from URLOBJ."
+  (edbi:data-source
+   (edbi-database-url-generate-uri urlobj)
+   (url-user urlobj)
+   (url-password urlobj)))
+
 (provide 'edbi-database-url)
 
 ;;; edbi-database-url.el ends here
