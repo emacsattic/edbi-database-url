@@ -64,8 +64,12 @@
           ;; Params.
           (concat
            (format "dbname=%s" (substring (url-filename urlobj) 1))
-           (and (url-host urlobj) (format ";host=%s" (url-host urlobj)))
-           (and (url-port urlobj) (format ";port=%s" (url-port urlobj))))))
+           (let ((host (url-host urlobj)))
+             (when (not (equal host ""))
+               (format ";host=%s" host)))
+           (let ((port (url-portspec urlobj)))
+             (when port
+               (format ";port=%s" port))))))
 
 (defun edbi-database-url-data-source (urlobj)
   "Create `edbi-data-source' from URLOBJ."

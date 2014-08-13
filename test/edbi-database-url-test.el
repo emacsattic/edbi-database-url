@@ -60,6 +60,12 @@
                   (edbi-database-url-parse-url
                    "postgres://user:password@localhost:5678/test")))))
 
+(ert-deftest test-edbi-database-url-generate-uri-no-port ()
+  (should (equal "dbi:SQLite:dbname=/tmp/db.sqlite3"
+                 (edbi-database-url-generate-uri
+                  (edbi-database-url-parse-url
+                   "sqlite:////tmp/db.sqlite3")))))
+
 ;;; Data source.
 
 (ert-deftest test-edbi-database-url-data-source ()
