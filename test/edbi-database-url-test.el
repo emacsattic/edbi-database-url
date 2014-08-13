@@ -66,6 +66,11 @@
                   (edbi-database-url-parse-url
                    "sqlite:////tmp/db.sqlite3")))))
 
+(ert-deftest test-edbi-database-url-generate-uri-unknown-scheme ()
+  (should-error (edbi-database-url-generate-uri
+                 (edbi-database-url-parse-url
+                  "hahaha:////tmp/db.sqlite3"))))
+
 ;;; Data source.
 
 (ert-deftest test-edbi-database-url-data-source ()

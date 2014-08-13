@@ -59,8 +59,9 @@
   "Generate DBI uri from URLOBJ struct."
   (format "dbi:%s:%s"
           ;; Engine.
-          (cdr (assoc-string
-                (url-type urlobj) edbi-database-url-engines))
+          (let ((engine (url-type urlobj)))
+            (or (cdr (assoc-string engine edbi-database-url-engines))
+                (error "Unknown database url engine: %s" engine)))
           ;; Params.
           (concat
            (format "dbname=%s" (substring (url-filename urlobj) 1))
