@@ -41,15 +41,12 @@
 
 (defun edbi-database-url-read-url ()
   "Read database url from environment variable."
-  (if current-prefix-arg
-      (if (use-region-p)
-          (buffer-substring-no-properties
-           (region-beginning)
-           (region-end))
-        (read-string "Database URL: "))
+  (if (use-region-p)
+      (buffer-substring-no-properties
+       (region-beginning)
+       (region-end))
     (or (getenv edbi-database-url-env)
-        (error "Unspecified %s environment variable"
-               edbi-database-url-env))))
+        (read-string "Database URL: "))))
 
 (defun edbi-database-url-parse-url (url)
   "Parse database URL."

@@ -17,23 +17,13 @@
 
 (ert-deftest test-edbi-database-url-read-url ()
   (let ((process-environment
-         '("DATABASE_URL=postgres://user:password@host:5678/name")))
-    (should (equal "postgres://user:password@host:5678/name"
+         '("DATABASE_URL=mysql://user:password@host:5678/name")))
+    (should (equal "mysql://user:password@host:5678/name"
                    (edbi-database-url-read-url)))))
 
-(ert-deftest test-edbi-database-url-read-url-error ()
-  (should-error (edbi-database-url-read-url)))
-
-(ert-deftest test-edbi-database-url-read-url-error-message ()
-  (should (equal "Unspecified DATABASE_URL environment variable"
-                 (condition-case err
-                     (edbi-database-url-read-url)
-                   (error (error-message-string err))))))
-
-(ert-deftest test-edbi-database-url-read-url-C-u ()
+(ert-deftest test-edbi-database-url-read-url-user-input ()
   (should (equal "postgres://user:password@host:5678/name"
-                 (let ((current-prefix-arg '(4)))
-                   (edbi-database-url-read-url)))))
+                 (edbi-database-url-read-url))))
 
 (ert-deftest test-edbi-database-url-read-url-region-active ()
   (with-temp-buffer
@@ -41,8 +31,7 @@
     (transient-mark-mode 1)
     (mark-whole-buffer)
     (should (equal "sqlite://user:password@host:5678/name"
-                   (let ((current-prefix-arg '(4)))
-                     (edbi-database-url-read-url))))))
+                   (edbi-database-url-read-url)))))
 
 ;;; Parse url.
 
