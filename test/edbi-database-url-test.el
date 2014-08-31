@@ -41,6 +41,12 @@
                   (edbi-database-url-parse-url
                    "sqlite://user:password@localhost:5678/name")))))
 
+(ert-deftest test-edbi-database-url-parse-url-sqlite-memory ()
+  (should (equal "_:memory:"  ;; First trash character will be removed later.
+                 (url-filename
+                  (edbi-database-url-parse-url
+                   "sqlite://:memory:")))))
+
 ;;; Generate uri.
 
 (ert-deftest test-edbi-database-url-generate-uri ()
@@ -54,6 +60,12 @@
                  (edbi-database-url-generate-uri
                   (edbi-database-url-parse-url
                    "sqlite:////tmp/db.sqlite3")))))
+
+(ert-deftest test-edbi-database-url-generate-uri-sqlite-memory ()
+  (should (equal "dbi:SQLite:dbname=:memory:"
+                 (edbi-database-url-generate-uri
+                  (edbi-database-url-parse-url
+                   "sqlite://:memory:")))))
 
 (ert-deftest test-edbi-database-url-generate-uri-unknown-scheme ()
   (should-error (edbi-database-url-generate-uri

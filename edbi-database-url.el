@@ -61,7 +61,9 @@
 
 (defun edbi-database-url-parse-url (url)
   "Parse database URL."
-  (url-generic-parse-url url))
+  (if (string= url "sqlite://:memory:")
+      (url-parse-make-urlobj "sqlite" nil nil "" nil "_:memory:" nil nil t)
+    (url-generic-parse-url url)))
 
 (defun edbi-database-url-generate-uri (urlobj)
   "Generate DBI uri from URLOBJ struct."
