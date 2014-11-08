@@ -1,5 +1,0 @@
-#!/bin/bash
-
-mkreadme || exit 1
-git add README.rst
-exit 0
