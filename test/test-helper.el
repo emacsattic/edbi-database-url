@@ -10,6 +10,8 @@
   (cask-initialize root-directory)
   (add-to-list 'load-path root-directory))
 
+(undercover "*.el")
+
 (provide 'test-helper)
 
 ;;; test-helper.el ends here
