@@ -1,7 +1,22 @@
+.. |travis| image:: https://travis-ci.org/proofit404/edbi-database-url.png
+    :target: https://travis-ci.org/proofit404/edbi-database-url
+    :alt: Build Status
+
+.. |coveralls| image:: https://coveralls.io/repos/proofit404/edbi-database-url/badge.png
+    :target: https://coveralls.io/r/proofit404/edbi-database-url
+    :alt: Coverage Status
+
+.. |melpa| image:: http://melpa.org/packages/edbi-database-url-badge.svg
+    :target: http://melpa.org/#/edbi-database-url
+    :alt: Melpa
+
+=================
 Edbi Database Url
 =================
 
-Run edbi with database url
+|travis| |coveralls| |melpa|
+
+Run Edbi_ with `database url`_.
 
 Usage
 -----
@@ -18,3 +33,6 @@ Connect to you database
 
 Optionally you can specify database url by marking region or type
 it interactively.
+
+.. _Edbi: https://github.com/kiwanami/emacs-edbi
+.. _database url: http://12factor.net/backing-services
