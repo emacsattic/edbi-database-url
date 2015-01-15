@@ -1,8 +1,8 @@
 ;;; edbi-database-url.el --- Run edbi with database url
 
-;; Copyright (C) 2014-2015 by Malyshev Artem
+;; Copyright (C) 2014-2015 by Artem Malyshev
 
-;; Author: Malyshev Artem <proofit404@gmail.com>
+;; Author: Artem Malyshev <proofit404@gmail.com>
 ;; URL: https://github.com/proofit404/edbi-database-url
 ;; Version: 1.0.0
 ;; Package-Requires: ((emacs "24") (edbi "0.1.3"))
