@@ -67,7 +67,7 @@
           (concat
            (format "dbname=%s" (substring (url-filename urlobj) 1))
            (let ((host (url-host urlobj)))
-             (when (not (equal host ""))
+             (unless (equal host "")
                (format ";host=%s" host)))
            (let ((port (url-portspec urlobj)))
              (when port
